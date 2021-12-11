@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasySplit">
         <activity
+            android:name=".EventEqual"
+            android:exported="false" />
+        <activity
+            android:name=".EventsPage"
+            android:exported="false" />
+        <activity
+            android:name=".EventDetails"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
@@ -20,7 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".StartActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +37,5 @@
             </intent-filter>
         </activity>
     </application>
-
-
 
 </manifest>

@@ -16,4 +16,12 @@
         android:layout_marginTop="376dp"
         android:layout_marginEnd="131dp"
         android:text="Log out" />
+
+    <Button
+        android:id="@+id/eventspage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Events Page" />
+
+
 </RelativeLayout>

@@ -15,13 +15,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
     private Button register;
+    private EditText name;
     private FirebaseAuth auth;
+    String emailTxt,passwordTxt,nameTxt;
+    FirebaseFirestore db= FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        name = findViewById(R.id.name);
         register = findViewById(R.id.register);
 
         auth= FirebaseAuth.getInstance();
@@ -37,15 +45,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         register.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                String txt_email= email.getText().toString();
-                String txt_password= password.getText().toString();
-
-                if(TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
+                emailTxt= email.getText().toString();
+                passwordTxt= password.getText().toString();
+                nameTxt= name.getText().toString();
+                if(TextUtils.isEmpty(emailTxt) || TextUtils.isEmpty(passwordTxt)){
                     Toast.makeText(RegisterActivity.this,"Empty Credentials", Toast.LENGTH_SHORT).show();
-                }else if(txt_password.length()<6){
+                }else if(passwordTxt.length()<6){
                     Toast.makeText(RegisterActivity.this,"Password too short", Toast.LENGTH_SHORT).show();
                 }else{
-                    registerUser(txt_email,txt_password);
+                    registerUser(emailTxt,passwordTxt);
                 }
             }
 
@@ -58,6 +66,21 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
+                    Map<String,Object> user= new HashMap<>();
+                    user.put("Name",nameTxt);
+
+                    db.collection("UserData").document(emailTxt).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                //Toast.makeText(RegisterActivity.this, "values added in user database",Toast.LENGTH_SHORT).show();
+                            }else{
+                                //Toast.makeText(RegisterActivity.this, "Couldn't add value",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
                     Toast.makeText(RegisterActivity.this,"Registration successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this , MainActivity.class));
                     finish();
@@ -67,51 +90,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
 }
 
-/*
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="165dp"
-        android:hint="Email"
-        android:padding="10dp" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="-4dp"
-        android:hint="Password"
-        android:padding="10dp" />
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="346dp"
-        android:padding="10dp"
-        android:text="LOGIN" />
-</RelativeLayout>
- */
