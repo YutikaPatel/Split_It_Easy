@@ -6,12 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +37,10 @@ public class EventsPage extends AppCompatActivity {
     String eventId="";
     private Button toEventDetails ;
     private Button addEvent;
+    ArrayList<LinearLayout> parentLLArrList = new ArrayList<LinearLayout>();
+    ArrayList<Integer> etIds= new ArrayList<Integer>();
+
+    LinearLayout parentLL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,8 @@ public class EventsPage extends AppCompatActivity {
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         List<String> list=new ArrayList<String>();
+        List<String> memlist=new ArrayList<String>();
+        parentLL = findViewById(R.id.parentLL);
 
         toEventDetails=findViewById(R.id.toEventDetails);
 
@@ -50,79 +60,56 @@ public class EventsPage extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    //list = new ArrayList<>();
-                    String eventsid="";
-                    int i=0;
-                    Toast.makeText(EventsPage.this,"before for" ,Toast.LENGTH_SHORT).show();
+
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         list.add(document.getId());
-                        eventsid=eventsid+list.get(i);
-                        Toast.makeText(EventsPage.this,"in for" ,Toast.LENGTH_LONG).show();
-                        i++;
+                       // Toast.makeText(EventsPage.this,"in for" ,Toast.LENGTH_LONG).show();
                     }
-                    Toast.makeText(EventsPage.this,"after for" ,Toast.LENGTH_LONG).show();
-                  //  Toast.makeText(EventsPage.this,eventsid ,Toast.LENGTH_LONG).show();
-                   // eventId=list.get(0);
-                    String heh= list.get(0)+list.get(1)+list.get(2);
-                    Log.d(TAG, list.toString());
-                  //  Toast.makeText(EventsPage.this,heh ,Toast.LENGTH_LONG).show();
-                   // Toast.makeText(EventsPage.this,list.get(0) ,Toast.LENGTH_LONG).show();
 
+                    String size=String.valueOf(list.size());
+                    Toast.makeText(EventsPage.this,size, Toast.LENGTH_LONG).show();
 
+                    for (int i=0; i<list.size(); i++){
+                        // Toast.makeText(EventDetails.this,"aahe aahe", Toast.LENGTH_LONG).show();
+                        parentLLArrList.add( new LinearLayout(EventsPage.this));
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(0,25,0,0);
+                        parentLLArrList.get(i).setLayoutParams(params);
+                        parentLLArrList.get(i).setId(i);
+                        parentLLArrList.get(i).setGravity(Gravity.CENTER);
+                        //parentLLArrList.get(i).setBackgroundColor(Color.YELLOW);
+                        parentLLArrList.get(i).setOrientation(LinearLayout.HORIZONTAL);
+                       // parentLLArrList.get(i).setWeightSum(100);
+                        Button b= new Button(EventsPage.this);
+                        b.setId(i+500);
+                        b.setText(list.get(i));
+                        b.setBackgroundColor(Color.CYAN);
+                        LinearLayout.LayoutParams params1= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+                        params1.setMargins(30,0,30,0);
+                        b.setLayoutParams(params1);
+                       // b.setGravity(Gravity.CENTER);
+                        int j=i;
+                        b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
-                    DocumentReference ref2= FirebaseFirestore.getInstance().collection("Trips").document(tripId).collection("eventlist").document(list.get(list.size()-1));
+                                    Intent intent= new Intent(EventsPage.this, PastEventDetails.class);
+                                    //intent.putExtra(EventEqual.EXTRA_DATA,list.get(i));
+                                    intent.putExtra("eventName", list.get(j));
+                                    startActivity(intent);
 
-                    ref2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()) {
-                                try{
-                                    EvenTester event1 = documentSnapshot.toObject(EvenTester.class);
-                                    //Toast.makeText(EventsPage.this,list.get(0) ,Toast.LENGTH_LONG).show();
-                                    Toast.makeText(EventsPage.this, "Name: " + event1.getName()+"bill"+event1.getBill()+ "\n" , Toast.LENGTH_SHORT).show();
-                                    //+ "cb: " + event1.getBill()+ "pb: "+event1.paidBy.get("Yutika")
-                                    //+ "pb: "+event1.paidBy.get("Yutika").toString()
-
-                                }catch (Exception e){
-                                    Toast.makeText(EventsPage.this, "NAy banla object", Toast.LENGTH_SHORT).show();
-                                }
-
-                            } else {
-                                Toast.makeText(EventsPage.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                             }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EventsPage.this, "Error!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        });
+                        parentLLArrList.get(i).addView(b);
+                        parentLL.addView(parentLLArrList.get(i));
+
+                    }
 
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }
             }
         });
-        /*Toast toast=Toast.makeText(EventsPage.this, "Document does not exist", Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.TOP,0,250);
-        toast.show();*/
-      //  eventId=list.get(0);
-       // String petr="Petrol";
-
-      /*  ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc= task.getResult();
-                    if(doc.exists()) {
-                        String trip_name =  task.getResult().getString("Name");
-
-
-                    }
-
-                }
-            }
-        });*/
 
         toEventDetails.setOnClickListener(new View.OnClickListener() {
             @Override

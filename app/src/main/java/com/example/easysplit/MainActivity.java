@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private Button eventspage;
     private Button addEvent;
 
-    private EditText bill;
-    private EditText name;
+   // private EditText bill;
+   // private EditText name;
 
     String txt_name,txt_bill;
     int num_bill;
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         eventspage=findViewById(R.id.eventspage);
         //addEvent=findViewById(R.id.addEvent);
 
-        bill=findViewById(R.id.bill);
-        name= findViewById(R.id.name);
+        //billAmount=findViewById(R.id.bill);
+        //name= findViewById(R.id.name);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

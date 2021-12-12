@@ -2,10 +2,12 @@ package com.example.easysplit;
 
 import static android.content.ContentValues.TAG;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,22 +24,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class TripMemRetrival {
+public class TripMemRetrival extends AppCompatActivity {
 
     HashMap<String, ArrayList<Double>> members = new HashMap<String, ArrayList<Double>>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ArrayList<String> membersList= new ArrayList<String>();
 
+    String memName= new String();
     TripMemRetrival() {
 
     }
 
+
     public HashMap<String, ArrayList<Double>> retrieve(String tripId) {
 
-        members.put("haha@gmail.com", new ArrayList<Double>());
+       /* members.put("haha@gmail.com", new ArrayList<Double>());
         ArrayList<Double> pp = members.get("haha@gmail.com");
         pp.add(1.0);
         pp.add(2.0);
-        members.put("haha@gmail.com", pp);
+        members.put("haha@gmail.com", pp);*/
 
         //tripId="temptrip";
 
@@ -160,4 +165,57 @@ public class TripMemRetrival {
             }
         });
     }
+
+
+
+    /*public void memberlist(String tripId) {
+
+
+        DocumentReference ref = FirebaseFirestore.getInstance().collection("Trips").document(tripId);
+
+        //List<String> mailIds = new ArrayList<String>();
+
+
+        final Task<QuerySnapshot> querySnapshotTask = db.collection("Trips").document(tripId).collection("memberlist").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        membersList.add(document.getId());
+
+                    }
+
+                }
+            }
+
+        });
+
+
+
+    }*/
+
+
+   /* interface FirestoreCallback{
+        void onCallback(List<String> list);
+    }
+*/
+
+
+   /* public String getNames(String mailId){
+        DocumentReference ref = FirebaseFirestore.getInstance().collection("UserData").document(mailId);
+        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    try {
+                       memName= documentSnapshot.getString("Name");
+                    }catch (Exception e){
+                    }
+                }
+            }
+        });
+     return memName;
+    }*/
 }
+

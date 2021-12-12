@@ -19,7 +19,7 @@
         android:lines="5"
         android:maxLines="4"
         android:singleLine="false"
-        android:text="Select The Participants "
+        android:text="Select the participants and enter their corresponding cosumed amount"
         android:textSize="18sp"
         android:textStyle="bold" />
 
