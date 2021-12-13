@@ -8,9 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EasySplit"
-
-        >
+        android:theme="@style/Theme.EasySplit">
+        <activity
+            android:name=".Settlement"
+            android:exported="false" />
         <activity
             android:name=".PastEventDetails"
             android:exported="false" />
@@ -44,7 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

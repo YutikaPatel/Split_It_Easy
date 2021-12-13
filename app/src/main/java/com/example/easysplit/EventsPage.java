@@ -36,6 +36,7 @@ public class EventsPage extends AppCompatActivity {
     String tripId="temptrip";
     String eventId="";
     private Button toEventDetails ;
+    private Button endTrip;
     private Button addEvent;
     ArrayList<LinearLayout> parentLLArrList = new ArrayList<LinearLayout>();
     ArrayList<Integer> etIds= new ArrayList<Integer>();
@@ -44,13 +45,16 @@ public class EventsPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_page);
+
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         List<String> list=new ArrayList<String>();
         List<String> memlist=new ArrayList<String>();
         parentLL = findViewById(R.id.parentLL);
+        endTrip=findViewById(R.id.endTrip);
 
         toEventDetails=findViewById(R.id.toEventDetails);
 
@@ -67,7 +71,7 @@ public class EventsPage extends AppCompatActivity {
                     }
 
                     String size=String.valueOf(list.size());
-                    Toast.makeText(EventsPage.this,size, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(EventsPage.this,size, Toast.LENGTH_LONG).show();
 
                     for (int i=0; i<list.size(); i++){
                         // Toast.makeText(EventDetails.this,"aahe aahe", Toast.LENGTH_LONG).show();
@@ -83,7 +87,10 @@ public class EventsPage extends AppCompatActivity {
                         Button b= new Button(EventsPage.this);
                         b.setId(i+500);
                         b.setText(list.get(i));
-                        b.setBackgroundColor(Color.CYAN);
+                        b.setBackgroundColor(Color.rgb(0,220,220));
+                        b.getBackground().setAlpha(50);
+                        //b.setTextColor(Color.WHITE);
+                        //b.setBackgroundColor(Color.parseColor("721C1B1B"));
                         LinearLayout.LayoutParams params1= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
                         params1.setMargins(30,0,30,0);
                         b.setLayoutParams(params1);
@@ -115,6 +122,12 @@ public class EventsPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(EventsPage.this, EventDetails.class));
+            }
+        });
+        endTrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(EventsPage.this, Settlement.class));
             }
         });
     }

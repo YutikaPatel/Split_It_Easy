@@ -16,11 +16,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_weight="10"
+        android:background="#1DB9BD"
         android:ems="10"
-        android:background="@color/teal_200"
         android:gravity="center"
         android:hint="Name of the Event"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textSize="19sp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -29,6 +30,7 @@
         android:layout_weight="7"
         android:gravity="center"
         android:text="Who Paid ?"
+        android:textSize="16sp"
         android:textStyle="bold" />
     <ScrollView
         android:id="@+id/scrollView2"
@@ -65,19 +67,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
-            android:gravity="center"
 
+            android:background="white"
+            android:gravity="center"
             android:text="Total Amount:"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
 
         <TextView
             android:id="@+id/billAmount"
             android:layout_width="0dp"
-            android:layout_weight="50"
             android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:background="white"
             android:gravity="center"
             android:hint="_______________" />
 
@@ -89,7 +93,9 @@
     android:layout_height="0dp"
     android:layout_weight="15"
     android:weightSum="100"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#1DB9BD"
+    >
 
     <TextView
         android:id="@+id/textView6"

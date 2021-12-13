@@ -4,35 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100"
     android:orientation="vertical"
     tools:context=".EventDetails">
 
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="17"
-        android:background="#1DB9BD"
-        android:gravity="center"
-        android:inputType="textMultiLine"
-        android:lines="5"
-        android:maxLines="4"
-        android:singleLine="false"
-        android:text="Select The Participants And Enter Their Corresponding Cosumed Amount :"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="0dp"
-        android:layout_weight="74"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
@@ -43,17 +26,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <Button
+                android:id="@+id/settlements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:text="Settlement" />
+
+
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/done"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:text="Done"
-        android:textSize="19dp"
-        android:textStyle="bold" />
+
 
 
 </LinearLayout>

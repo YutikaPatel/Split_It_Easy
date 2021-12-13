@@ -26,14 +26,17 @@ import java.util.List;
 
 public class TripMemRetrival extends AppCompatActivity {
 
+    TripMemRetrival() {
+
+    }
+
+
+
     HashMap<String, ArrayList<Double>> members = new HashMap<String, ArrayList<Double>>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ArrayList<String> membersList= new ArrayList<String>();
 
     String memName= new String();
-    TripMemRetrival() {
-
-    }
 
 
     public HashMap<String, ArrayList<Double>> retrieve(String tripId) {

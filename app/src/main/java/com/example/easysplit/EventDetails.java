@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -211,13 +212,18 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                         params.setMargins(0,25,0,0);
                         parentLLArrList.get(i).setLayoutParams(params);
                         parentLLArrList.get(i).setId(i);
-                        parentLLArrList.get(i).setBackgroundColor(Color.YELLOW);
+                        //parentLLArrList.get(i).setBackgroundColor(Color.YELLOW);
+                        parentLLArrList.get(i).setBackgroundColor(Color.rgb(0,220,220));
+                        parentLLArrList.get(i).getBackground().setAlpha(50);
                         parentLLArrList.get(i).setOrientation(LinearLayout.HORIZONTAL);
                         parentLLArrList.get(i).setWeightSum(100);
                         CheckBox cb= new CheckBox(EventDetails.this);
                         cb.setId(i+500);
                         cb.setText(here_mailIdsNames.get(membersList.get(i)));
-                        cb.setBackgroundColor(Color.CYAN);
+                        cb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
+                        //cb.setBackgroundColor(Color.CYAN);
+                        //cb.setBackgroundColor(Color.rgb(0,220,220));
+                        //cb.getBackground().setAlpha(50);
                         LinearLayout.LayoutParams params1= new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,66.0f);
                         params1.setMargins(0,0,0,0);
                         cb.setLayoutParams(params1);
@@ -235,13 +241,14 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                                     LinearLayout.LayoutParams params2= new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,34.0f);
                                     params2.setMarginEnd(0);
                                     et.setLayoutParams(params2);
-                                    et.setBackgroundColor(Color.RED);
+                                    //et.setBackgroundColor(Color.RED);
+                                    //et.setBackgroundColor(Color.rgb(0,220,220));
+                                    //et.getBackground().setAlpha(50);
                                     et.setHint("amount");
                                     et.setGravity(Gravity.CENTER);
                                     et.setHorizontallyScrolling(true);
                                     et.addTextChangedListener(textWatcher);
-
-
+                                    et.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
                                     parentLLArrList.get(Integer.parseInt(String.valueOf(v.getId()))-500).addView(et);
                                     Toast.makeText(EventDetails.this,String.valueOf(Integer.parseInt(String.valueOf(v.getId()))-500), Toast.LENGTH_SHORT).show();
                                     etIds.add(Integer.parseInt(String.valueOf(v.getId()))+500);

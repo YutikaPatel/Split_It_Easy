@@ -88,13 +88,15 @@ public class EventUnequal extends AppCompatActivity  {
             params.setMargins(0,25,0,0);
             parentLLArrList.get(i).setLayoutParams(params);
             parentLLArrList.get(i).setId(i);
-            parentLLArrList.get(i).setBackgroundColor(Color.YELLOW);
+
+            parentLLArrList.get(i).setBackgroundColor(Color.rgb(0,220,220));
+            parentLLArrList.get(i).getBackground().setAlpha(50);
             parentLLArrList.get(i).setOrientation(LinearLayout.HORIZONTAL);
             parentLLArrList.get(i).setWeightSum(100);
             CheckBox cb= new CheckBox(this);
             cb.setId(i+500);
             cb.setText(event1.mailIdsNames.get((membersList.get(i))));
-            cb.setBackgroundColor(Color.CYAN);
+
             LinearLayout.LayoutParams params1= new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,66.0f);
             params1.setMargins(0,0,0,0);
             cb.setLayoutParams(params1);
@@ -113,7 +115,7 @@ public class EventUnequal extends AppCompatActivity  {
                         LinearLayout.LayoutParams params2= new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,34.0f);
                         params2.setMarginEnd(0);
                         et.setLayoutParams(params2);
-                        et.setBackgroundColor(Color.RED);
+
                         et.setHint("amount");
                         et.setGravity(Gravity.CENTER);
                         et.setHorizontallyScrolling(true);

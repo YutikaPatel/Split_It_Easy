@@ -53,6 +53,9 @@ public class PastEventDetails extends AppCompatActivity {
 
         parentLL = findViewById(R.id.parentLL);
 
+        LinearLayout linearLayout=findViewById(R.id.linearlayout);
+        linearLayout.setBackgroundColor(Color.rgb(0,220,220));
+        linearLayout.getBackground().setAlpha(50);
 
 
         DocumentReference ref2= FirebaseFirestore.getInstance().collection("Trips").document(tripId).collection("eventlist").document(eventName);
