@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasySplit">
         <activity
+            android:name=".TripDetails"
+            android:exported="false" />
+        <activity
             android:name=".Settlement"
             android:exported="false" />
         <activity

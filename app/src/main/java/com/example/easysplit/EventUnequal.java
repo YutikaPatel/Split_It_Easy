@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -43,7 +47,7 @@ public class EventUnequal extends AppCompatActivity  {
     Event event1;
 
     ArrayList<String> membersList;
-    String tripId="temptrip";
+    String tripId;
     LinearLayout parentLL;
     ArrayList<LinearLayout> parentLLArrList = new ArrayList<LinearLayout>();
     ArrayList<Integer> etIds= new ArrayList<Integer>();
@@ -74,7 +78,8 @@ public class EventUnequal extends AppCompatActivity  {
         setContentView(R.layout.activity_event_unequal);
 
         done=findViewById(R.id.done);
-
+        Intent prev_intent = getIntent();
+        tripId=prev_intent.getStringExtra("tripId");
 
         parentLL = findViewById(R.id.parentLL);
         event1=(Event)getIntent().getSerializableExtra(EXTRA_DATA);
@@ -165,6 +170,7 @@ public class EventUnequal extends AppCompatActivity  {
                     sum+=Double.parseDouble(txt_amount);
                 }
                 if(sum==Double.parseDouble(event1.billAmount)){
+                    //Toast.makeText(EventUnequal.this, "Just ghuslo JJJJJJJJJJJJJJJJJJJJJJJJJJ",Toast.LENGTH_LONG).show();
 
                     for(int i=0;i<etIds.size();i++){
                         String mailId= membersList.get(etIds.get(i)-1000);
@@ -173,15 +179,19 @@ public class EventUnequal extends AppCompatActivity  {
                         if(txt_amount.equals("") || txt_amount==null){
                             txt_amount="0";
                         }
-                        sum+=Double.parseDouble(txt_amount);
                         participants.put( event1.mailIdsNames.get(mailId),txt_amount);
                         tr.updatetoPay(tripId,mailId,txt_amount);
+                        //Toast.makeText(EventUnequal.this, "mail"+mailId+"  amt "+txt_amount, Toast.LENGTH_LONG).show();
                     }
+                    //Toast.makeText(EventUnequal.this, "size "+participants.size(), Toast.LENGTH_LONG).show();
                     event1.setParticipants(participants);
+                   // Toast.makeText(EventUnequal.this, "size "+event1.participants.size(), Toast.LENGTH_LONG).show();
+                   // Toast.makeText(EventUnequal.this, "mail"+event1.membersMails.size(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(EventUnequal.this, "size"+event1.paidmailIds.size(), Toast.LENGTH_LONG).show();
+                    for (Map.Entry<String, String> set :event1.paidmailIds.entrySet()) {
+                        Toast.makeText(EventUnequal.this, "mail"+set.getValue()+"  amt "+set.getValue(), Toast.LENGTH_LONG).show();
+                      tr.updatePaid(tripId,set.getKey(),set.getValue());
 
-                    // Iterating HashMap through for loop
-                    for (Map.Entry<String, String> set :event1.paidBy.entrySet()) {
-                        tr.updatePaid(tripId,set.getKey(),set.getValue());
                     }
 
 
@@ -190,14 +200,15 @@ public class EventUnequal extends AppCompatActivity  {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(EventUnequal.this, "Event successfully added",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(EventUnequal.this, "Event successfully added",Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(EventUnequal.this, "Couldn't add event sorry",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-
-                    startActivity(new Intent(EventUnequal.this, EventsPage.class));
+                    Intent intent = new Intent(EventUnequal.this, EventsPage.class);
+                    intent.putExtra("tripId",tripId);
+                    startActivity(intent);
 
                 }else{
                     Toast.makeText(EventUnequal.this, "Total consumed amount does not match the total paid amount ₹"+event1.billAmount+"",Toast.LENGTH_SHORT).show();

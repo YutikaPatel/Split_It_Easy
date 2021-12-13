@@ -29,11 +29,13 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EventsPage extends AppCompatActivity {
 
-    String tripId="temptrip";
+    String tripId;
     String eventId="";
     private Button toEventDetails ;
     private Button endTrip;
@@ -48,15 +50,39 @@ public class EventsPage extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_page);
-
+       Intent prev_intent = getIntent();
+        tripId=prev_intent.getStringExtra("tripId");
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         List<String> list=new ArrayList<String>();
         List<String> memlist=new ArrayList<String>();
         parentLL = findViewById(R.id.parentLL);
         endTrip=findViewById(R.id.endTrip);
-
         toEventDetails=findViewById(R.id.toEventDetails);
+
+        DocumentReference ref2= FirebaseFirestore.getInstance().collection("Trips").document(tripId);
+
+        ref2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if(task.isSuccessful()){
+                    DocumentSnapshot doc= task.getResult();
+                    if(doc.exists()){
+                        String tripEnded =  task.getResult().getString("tripEnded");
+                        if(tripEnded.equals("true")){
+                            endTrip.setText("FINAL SETTLEMENTS");
+                        }
+
+
+
+                    }else{
+
+                    }
+                }
+
+            }
+        });
 
         DocumentReference ref= FirebaseFirestore.getInstance().collection("Trips").document(tripId);
 
@@ -103,6 +129,7 @@ public class EventsPage extends AppCompatActivity {
                                     Intent intent= new Intent(EventsPage.this, PastEventDetails.class);
                                     //intent.putExtra(EventEqual.EXTRA_DATA,list.get(i));
                                     intent.putExtra("eventName", list.get(j));
+                                    intent.putExtra("tripId",tripId);
                                     startActivity(intent);
 
                             }
@@ -121,13 +148,63 @@ public class EventsPage extends AppCompatActivity {
         toEventDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EventsPage.this, EventDetails.class));
+                DocumentReference ref= FirebaseFirestore.getInstance().collection("Trips").document(tripId);
+
+                ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if(task.isSuccessful()){
+                            DocumentSnapshot doc= task.getResult();
+                            if(doc.exists()){
+                                String tripEnded =  task.getResult().getString("tripEnded");
+                                if(tripEnded.equals("false")){
+                                    Intent intent = new Intent(EventsPage.this, EventDetails.class);
+                                    intent.putExtra("tripId",tripId);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Toast.makeText(EventsPage.this,"The trip has already ended.",Toast.LENGTH_LONG);
+                                }
+
+
+                            }else{
+
+                            }
+                        }
+
+                    }
+                });
+
             }
         });
         endTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EventsPage.this, Settlement.class));
+                DocumentReference ref= FirebaseFirestore.getInstance().collection("Trips").document(tripId);
+
+                ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if(task.isSuccessful()){
+                            DocumentSnapshot doc= task.getResult();
+                            if(doc.exists()){
+                               ref.update("tripEnded","true");
+
+
+                            }else{
+                                Log.d("LOGS", "No data");
+                                Toast.makeText(EventsPage.this,"No data" ,Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+                });
+                Intent intent = new Intent(EventsPage.this,Settlement.class);
+                intent.putExtra("tripId",tripId);
+                startActivity(intent);
+
             }
         });
     }

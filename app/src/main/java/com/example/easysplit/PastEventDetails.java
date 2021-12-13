@@ -27,7 +27,7 @@ import java.util.Map;
 public class PastEventDetails extends AppCompatActivity {
 
     public static final String EXTRA_DATA="EXTRA_DATA";
-    String tripId="temptrip";
+    String tripId;
     private TextView name;
     private TextView createdBy;
     private TextView billAmount;
@@ -44,7 +44,8 @@ public class PastEventDetails extends AppCompatActivity {
         setContentView(R.layout.activity_past_event_details);
         String eventName = getIntent().getExtras().getString("eventName");
         Toast.makeText(PastEventDetails.this,eventName, Toast.LENGTH_LONG).show();
-
+        Intent prev_intent = getIntent();
+        tripId=prev_intent.getStringExtra("tripId");
 
         name=findViewById(R.id.name  );
         createdBy=findViewById(R.id.createdBy );
@@ -108,6 +109,7 @@ public class PastEventDetails extends AppCompatActivity {
                         participants.setGravity(Gravity.FILL);
                        // participants.setPadding(,17,0,17);
                         participants.setText("Participants ->");
+                        participants.setTextColor(Color.BLACK);
                         participants.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
                         participants.setTypeface(null, Typeface.BOLD);;
                         parentLL.addView(participants);

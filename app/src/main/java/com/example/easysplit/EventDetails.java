@@ -44,7 +44,7 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
     Event event1;
     private EditText eventName;
 
-    String tripId="temptrip";
+    String tripId;
     LinearLayout parentLL;
     ArrayList<LinearLayout> parentLLArrList = new ArrayList<LinearLayout>();
     ArrayList<Integer> etIds= new ArrayList<Integer>();
@@ -66,7 +66,8 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         // List<String> list=new ArrayList<String>();
        // List<String> memlist=new ArrayList<String>();
-
+        Intent prev_intent = getIntent();
+        tripId=prev_intent.getStringExtra("tripId");
 
         eventName= findViewById(R.id.eventName);
         parentLL = findViewById(R.id.parentLL);
@@ -298,7 +299,7 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                 String txt_bill=billAmount.getText().toString();
 
                 HashMap<String,String> paidBy=new HashMap<String,String>();
-
+                HashMap<String,String> paidmailIds= new HashMap<String,String>();
                 for(int i=0;i<etIds.size();i++){
                     String mailId= membersList.get(etIds.get(i)-1000);
                     currentEt=findViewById(etIds.get(i));
@@ -307,7 +308,7 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                         txt_amount="0";
                     }
                     paidBy.put( here_mailIdsNames.get(mailId),txt_amount);
-
+                    paidmailIds.put(mailId,txt_amount);
 
                 }
 
@@ -318,8 +319,11 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                 event1.setCreatedBy(here_mailIdsNames.get(user.getEmail()));
                 event1.setPaidBy(paidBy);
                 event1.setDistributionType("Equal");
+                event1.paidmailIds=paidmailIds;
+                Toast.makeText(EventDetails.this, "size                         "+event1.paidmailIds.size(), Toast.LENGTH_LONG).show();
                 Intent i= new Intent(EventDetails.this, EventEqual.class);
                 i.putExtra(EventEqual.EXTRA_DATA,event1);
+                i.putExtra("tripId",tripId);
                 startActivity(i);
             }
         });
@@ -333,13 +337,13 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                 String txt_bill=billAmount.getText().toString();
 
                 HashMap<String,String> paidBy=new HashMap<String,String>();
-
+                HashMap<String,String> paidmailIds= new HashMap<String,String>();
                 for(int i=0;i<etIds.size();i++){
                     String mailId= membersList.get(etIds.get(i)-1000);
                     currentEt=findViewById(etIds.get(i));
                     String txt_amount= currentEt.getText().toString();
                     paidBy.put( here_mailIdsNames.get(mailId),txt_amount);
-
+                    paidmailIds.put(mailId,txt_amount);
 
                 }
 
@@ -348,9 +352,11 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 event1.setCreatedBy(here_mailIdsNames.get(user.getEmail()));
                 event1.setPaidBy(paidBy);
+                event1.paidmailIds=paidmailIds;
                 event1.setDistributionType("Unequal");
                 Intent i= new Intent(EventDetails.this, EventUnequal.class);
                 i.putExtra(EventEqual.EXTRA_DATA,event1);
+                i.putExtra("tripId",tripId);
                 startActivity(i);
             }
         });

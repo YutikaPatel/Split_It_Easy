@@ -28,7 +28,7 @@ public class EventEqual extends AppCompatActivity {
     Event event1;
 
     ArrayList<String> membersList;
-    String tripId="temptrip";
+    String tripId;
     LinearLayout parentLL;
     ArrayList<LinearLayout> parentLLArrList = new ArrayList<LinearLayout>();
     ArrayList<Integer> memIds= new ArrayList<Integer>();
@@ -59,7 +59,8 @@ public class EventEqual extends AppCompatActivity {
         setContentView(R.layout.activity_event_unequal);
 
         done=findViewById(R.id.done);
-
+        Intent prev_intent = getIntent();
+        tripId=prev_intent.getStringExtra("tripId");
 
         parentLL = findViewById(R.id.parentLL);
         event1=(Event)getIntent().getSerializableExtra(EXTRA_DATA);
@@ -132,7 +133,7 @@ public class EventEqual extends AppCompatActivity {
                     event1.setParticipants(participants);
 
                     // Iterating HashMap through for loop
-                    for (Map.Entry<String, String> set :event1.paidBy.entrySet()) {
+                    for (Map.Entry<String, String> set :event1.paidmailIds.entrySet()) {
                         tr.updatePaid(tripId,set.getKey(),set.getValue());
                     }
 
@@ -147,8 +148,9 @@ public class EventEqual extends AppCompatActivity {
                             }
                         }
                     });
-
-                    startActivity(new Intent(EventEqual.this, EventsPage.class));
+                    Intent intent = new Intent(EventEqual.this, EventsPage.class);
+                    intent.putExtra("tripId",tripId);
+                    startActivity(intent);
 
 
             }

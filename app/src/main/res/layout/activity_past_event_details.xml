@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="0"
     android:background="#00DCDC"
     android:id="@+id/linearlayout"
     android:orientation="vertical"
@@ -39,6 +38,7 @@
                 android:gravity="fill"
                 android:padding="10dp"
                 android:text="TextView"
+                android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -50,6 +50,7 @@
                 android:gravity="fill"
                 android:padding="10dp"
                 android:text="TextView"
+                android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -61,6 +62,7 @@
                 android:gravity="fill"
                 android:padding="10dp"
                 android:text="TextView"
+                android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -72,6 +74,7 @@
                 android:gravity="fill"
                 android:padding="10dp"
                 android:text="Text View"
+                android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -83,6 +86,7 @@
                 android:gravity="fill"
                 android:padding="10dp"
                 android:text="Paid By ->"
+                android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textStyle="bold" />
         </LinearLayout>

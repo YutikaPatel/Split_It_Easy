@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -85,7 +86,8 @@ public class Settlement extends AppCompatActivity {
 
     List<String> mailIds = new ArrayList<String>();
     ArrayList<String> str = new ArrayList<String>();
-    String tripId="temptrip";
+    String tripId;
+
     HashMap<String, ArrayList<Double>> members = new HashMap<String, ArrayList<Double>>();
     ArrayList<Receiver> receivers= new ArrayList<Receiver>();
     ArrayList<Payer> payers= new ArrayList<Payer>();
@@ -94,6 +96,8 @@ public class Settlement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settlement);
+        Intent prev_intent = getIntent();
+       tripId=prev_intent.getStringExtra("tripId");
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -126,7 +130,7 @@ public class Settlement extends AppCompatActivity {
                    // Toast.makeText(Settlement.this,"Navinnnnnnnnn for  "+mailIds.size()+"" ,Toast.LENGTH_SHORT).show();
 
                     for (int i = 0; i < mailIds.size(); i++) {
-                        String tripId = "temptrip";
+
                         DocumentReference ref2 = FirebaseFirestore.getInstance().collection("Trips").document(tripId).collection("memberlist").document(mailIds.get(i));
                         String currentMailId = mailIds.get(i);
                         ref2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
