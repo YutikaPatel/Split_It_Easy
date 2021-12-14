@@ -152,16 +152,44 @@ public class TripDetails extends AppCompatActivity {
         window.setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         Button dialogButton = (Button) dialog.findViewById(R.id.okButton);
         EditText emailTextView= (EditText)dialog.findViewById(R.id.emailTextView);
+
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String memberEmail = emailTextView.getText().toString();
-                members.add(memberEmail);
-                list.append("\n"+memberEmail);
-                Toast.makeText(TripDetails.this,"Member added!",Toast.LENGTH_LONG).show();
-                Log.d("LOGS","Member added!"+memberEmail);
-                dialog.dismiss();
+                DocumentReference ref= FirebaseFirestore.getInstance().collection("UserData").document(memberEmail);
+                ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if(task.isSuccessful()){
+                            DocumentSnapshot doc= task.getResult();
+                            if(doc.exists()){
+
+
+                                members.add(memberEmail);
+                                list.append("\n"+memberEmail);
+                                Toast.makeText(TripDetails.this,"Member added!",Toast.LENGTH_LONG).show();
+                                Log.d("LOGS","Member added!"+memberEmail);
+                                dialog.dismiss();
+
+
+
+
+                            }else{
+                                Log.d("LOGS", "No data");
+                                Toast.makeText(TripDetails.this,"Member does not exist. Please enter a registered email ID!" ,Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+
+
+                            }
+                        }
+
+                    }
+                });
+
+
             }
         });
 

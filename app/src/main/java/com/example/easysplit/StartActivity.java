@@ -48,6 +48,10 @@ public class StartActivity extends AppCompatActivity {
             startActivity(new Intent(StartActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
         }
     }
+    @Override
+    public void onBackPressed(){
+        finishAffinity();
+    }
 }
 
 
