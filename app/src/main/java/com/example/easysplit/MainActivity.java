@@ -56,48 +56,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         ArrayList<String> arr = (ArrayList<String>) doc.get("Trips");
 
+                       if(arr!=null) {
+                           Iterator iter = arr.iterator();
 
-                        Iterator iter = arr.iterator();
+                           int currTop = 200;
+                           while (iter.hasNext()) {
+                               String currTrip = (String) iter.next();
 
-                        int currTop = 200;
-                        while (iter.hasNext()) {
-                            String currTrip = (String) iter.next();
+                               Button newBt = new Button(MainActivity.this);
+                               DocumentReference ref = FirebaseFirestore.getInstance().collection("Trips").document(currTrip);
 
-                            Button newBt = new Button(MainActivity.this);
-                            DocumentReference ref = FirebaseFirestore.getInstance().collection("Trips").document(currTrip);
+                               ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                   @Override
+                                   public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                            ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                       if (task.isSuccessful()) {
+                                           DocumentSnapshot doc = task.getResult();
+                                           if (doc.exists()) {
+                                               String name = task.getResult().getString("Name");
+                                               newBt.setId(newBt.generateViewId());
+                                               buttons.put(newBt.getId(), currTrip);
+                                               newBt.setOnClickListener(MainActivity.this);
+                                               newBt.setText(name);
 
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot doc = task.getResult();
-                                        if (doc.exists()) {
-                                            String name = task.getResult().getString("Name");
-                                            newBt.setId(newBt.generateViewId());
-                                            buttons.put(newBt.getId(), currTrip);
-                                            newBt.setOnClickListener(MainActivity.this);
-                                            newBt.setText(name);
+                                           } else {
 
-                                        } else {
+                                               Toast.makeText(MainActivity.this, "Sorry Error Occured", Toast.LENGTH_SHORT).show();
+                                           }
+                                       }
 
-                                            Toast.makeText(MainActivity.this, "Sorry Error Occured", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-
-                                }
-                            });
+                                   }
+                               });
 
 
-                            LinearLayout rl = (LinearLayout) findViewById(R.id.rel);
-                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                            params.setMargins(20,25,20,0);
-                            rl.addView(newBt, params);
-                            newBt.setBackgroundColor(Color.rgb(0,220,220));
-                            newBt.getBackground().setAlpha(50);
+                               LinearLayout rl = (LinearLayout) findViewById(R.id.rel);
+                               LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                               params.setMargins(20, 25, 20, 0);
+                               rl.addView(newBt, params);
+                               newBt.setBackgroundColor(Color.rgb(0, 220, 220));
+                               newBt.getBackground().setAlpha(50);
 
-                        }
-
+                           }
+                       }
 
                     } else {
                         Log.d("Document", "No data");
