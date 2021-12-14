@@ -73,7 +73,7 @@ public class EventsPage extends AppCompatActivity {
                         if(tripEnded.equals("true")){
                             endTrip.setText("FINAL SETTLEMENTS");
                             toEventDetails.setEnabled(false);
-                            Toast.makeText(EventsPage.this,"Trip has ended! Cannot add any more events!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(EventsPage.this,"Trip has ended!",Toast.LENGTH_LONG).show();
                         }
 
                     }else{

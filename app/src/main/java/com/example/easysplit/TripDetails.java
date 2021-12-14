@@ -66,6 +66,7 @@ public class TripDetails extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        Toast.makeText(TripDetails.this,"On back pressed!",Toast.LENGTH_SHORT).show();
         finishAffinity();
     }
     public void addTrip(View view){

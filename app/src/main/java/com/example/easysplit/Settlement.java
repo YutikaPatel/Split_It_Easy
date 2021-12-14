@@ -169,7 +169,7 @@ public class Settlement extends AppCompatActivity {
 
         CountDownTimer cTimer=null;
 
-        cTimer = new CountDownTimer(4000, 80) {
+        cTimer = new CountDownTimer(3000, 70) {
             public void onTick(long millisUntilFinished) {
 
 

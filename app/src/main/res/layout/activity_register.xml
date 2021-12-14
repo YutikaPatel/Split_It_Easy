@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
     tools:context=".RegisterActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="32dp">
@@ -51,7 +52,7 @@
     <Button
         android:id="@+id/register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="78dp"
         android:layout_below="@id/password"
         android:text="register"
 

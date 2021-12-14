@@ -3,20 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.209375" />
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/drawable/ic_launcher_background.xml" value="0.209375" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_event.xml" value="0.25416666666666665" />
-        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_event_details.xml" value="0.264" />
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_event_details.xml" value="0.2" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_event_equal.xml" value="0.25416666666666665" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_event_unequal.xml" value="0.264" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_events_page.xml" value="0.264" />
-        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_login.xml" value="0.13020833333333334" />
-        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_past_event_details.xml" value="0.2" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_settlement.xml" value="0.2" />
-        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_start.xml" value="0.19375" />
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_start.xml" value="0.2" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_trip_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/dialog_add_members.xml" value="0.25416666666666665" />
-        <entry key="app/src/main/res/layout/activity_events_page.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/layout/activity_settlement.xml" value="0.20572916666666666" />
       </map>

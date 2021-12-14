@@ -15,8 +15,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,9 +70,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
 
+                    //ArrayList<String> Trips= new ArrayList<String>();
                     Map<String,Object> user= new HashMap<>();
                     user.put("Name",nameTxt);
-
                     db.collection("UserData").document(emailTxt).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -80,6 +83,12 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
+
+                    ArrayList<String> Trips= new ArrayList<String>();
+
+
+
+
 
                     Toast.makeText(RegisterActivity.this,"Registration successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this , MainActivity.class));
