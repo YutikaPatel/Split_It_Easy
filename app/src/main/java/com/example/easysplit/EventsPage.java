@@ -73,7 +73,7 @@ public class EventsPage extends AppCompatActivity {
                         if(tripEnded.equals("true")){
                             endTrip.setText("FINAL SETTLEMENTS");
                             toEventDetails.setEnabled(false);
-                            Toast.makeText(EventsPage.this,"Trip has ended!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(EventsPage.this,"This trip has ended",Toast.LENGTH_LONG).show();
                         }
 
                     }else{
@@ -155,7 +155,7 @@ public class EventsPage extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                                 else{
-                                    Toast.makeText(EventsPage.this,"The trip has already ended.",Toast.LENGTH_LONG);
+                                    Toast.makeText(EventsPage.this,"This trip has ended.",Toast.LENGTH_LONG);
                                 }
 
 

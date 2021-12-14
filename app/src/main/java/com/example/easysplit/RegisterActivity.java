@@ -86,20 +86,18 @@ public class RegisterActivity extends AppCompatActivity {
 
                     ArrayList<String> Trips= new ArrayList<String>();
 
-
-
-
-
                     Toast.makeText(RegisterActivity.this,"Registration successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this , MainActivity.class));
                     finish();
                 }else{
-                    Toast.makeText(RegisterActivity.this,"Registration failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
+    public void onBackPressed(){
+        finishAffinity();
+    }
 
 }
 

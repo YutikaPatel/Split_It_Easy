@@ -8,8 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private void loginUser(String email, String password) {
+
         auth.signInWithEmailAndPassword(email , password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
@@ -62,7 +65,17 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this , MainActivity.class));
                 finish();
             }
+
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this,"Wrong username or password !", Toast.LENGTH_SHORT).show();
+            }
         });
 
+    }
+    public void onBackPressed(){
+        finishAffinity();
     }
 }

@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                            } else {
 
-                                               Toast.makeText(MainActivity.this, "Sorry Error Occured", Toast.LENGTH_SHORT).show();
+                                               Toast.makeText(MainActivity.this, "Sorry something went wrong ", Toast.LENGTH_SHORT).show();
                                            }
                                        }
 
@@ -100,8 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                        }
 
                     } else {
-                        Log.d("Document", "No data");
-                        Toast.makeText(MainActivity.this, "No data", Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
