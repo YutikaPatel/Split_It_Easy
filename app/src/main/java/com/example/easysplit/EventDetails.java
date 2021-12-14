@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class EventDetails extends AppCompatActivity implements TextWatcher {
+public class EventDetails extends AppCompatActivity  {
 
     private Button toEventEqual;
     private Button toEventUnequal;
@@ -52,10 +52,7 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
     List<String> membersListname= new ArrayList<String>();
     private EditText currentEt;
 
-
-
     TripMemRetrival tr;
-    // FirebaseFirestore db= FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +61,6 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
         setContentView(R.layout.activity_event_details);
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
-        // List<String> list=new ArrayList<String>();
-       // List<String> memlist=new ArrayList<String>();
         Intent prev_intent = getIntent();
         tripId=prev_intent.getStringExtra("tripId");
 
@@ -81,8 +76,6 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
 
         DocumentReference ref = FirebaseFirestore.getInstance().collection("Trips").document(tripId);
 
-        //List<String> mailIds = new ArrayList<String>();
-
 
         db.collection("Trips").document(tripId).collection("memberlist").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -91,23 +84,7 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         membersList.add(document.getId());
-                       // DocumentReference ref2 = FirebaseFirestore.getInstance().collection("UserData").document(document.getId());
-                       /* ref2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                            @Override
-                                                            public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
-                                                                if (documentSnapshot.exists()) {
-                                                                    try {
-                                                                        //  Toast.makeText(EventDetails.this, documentSnapshot.getString("Name") + "*****************", Toast.LENGTH_SHORT).show();
-                                                                        here_mailIdsNames.put(document.getId(), documentSnapshot.getString("Name"));
 
-                                                                    } catch (Exception e) {
-                                                                    }
-
-                                                                }
-                                                            }
-
-                                                        }
-                        );*/
                     }
                     for(int i=0;i<membersList.size();i++){
                         int j=i;
@@ -117,7 +94,6 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                             public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
                                 if (documentSnapshot.exists()) {
                                     try {
-                                        Toast.makeText(EventDetails.this, documentSnapshot.getString("Name")+"*****************", Toast.LENGTH_SHORT).show();
                                         here_mailIdsNames.put(membersList.get(j),documentSnapshot.getString("Name") );
                                     }catch (Exception e){
                                     }
@@ -136,27 +112,16 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
 
         CountDownTimer cTimer = null;
 
-//start timer function
-//
-
-            cTimer = new CountDownTimer(5000, 100) {
+            cTimer = new CountDownTimer(4000, 80) {
                 public void onTick(long millisUntilFinished) {
-                    Toast.makeText(EventDetails.this, "wait", Toast.LENGTH_SHORT).show();
-                   // Toast.makeText(EventDetails.this,"aahe aahe", Toast.LENGTH_SHORT).show();
-
-
-
-
-
 
                 }
                 public void onFinish() {
 
-                    Toast.makeText(EventDetails.this, membersList.size()+"  ////////////  "+here_mailIdsNames.size(), Toast.LENGTH_LONG).show();
                     event1.mailIdsNames=here_mailIdsNames;
                     event1.membersMails=membersList;
                     String size=String.valueOf(membersList.size());
-                    Toast.makeText(EventDetails.this,size, Toast.LENGTH_LONG).show();
+
 
                     TextWatcher textWatcher = new TextWatcher() {
                         @Override
@@ -179,6 +144,7 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                                     result += Double.parseDouble(txt_amount);
                                 }
                                 billAmount.setText(String.valueOf(result));
+                                billAmount.setTextSize(20);                                    /////////////////////
                             }catch(Exception e){
 
                             }
@@ -187,22 +153,6 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                         @Override
                         public void afterTextChanged(Editable editable) {
 
-                          /*  try {
-                                double result = 0;
-                                for (int h = 0; h < etIds.size(); h++) {
-
-                                    currentEt = findViewById(etIds.get(h));
-                                    String txt_amount = currentEt.getText().toString();
-                                    if(txt_amount.equals("") || txt_amount==null){
-                                        continue;
-                                    }
-                                    result += Double.parseDouble(txt_amount);
-                                }
-                                billAmount.setText(String.valueOf(result));
-                            }catch(Exception e){
-
-                            }
-*/
                         }
                     };
 
@@ -213,7 +163,6 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                         params.setMargins(0,25,0,0);
                         parentLLArrList.get(i).setLayoutParams(params);
                         parentLLArrList.get(i).setId(i);
-                        //parentLLArrList.get(i).setBackgroundColor(Color.YELLOW);
                         parentLLArrList.get(i).setBackgroundColor(Color.rgb(0,220,220));
                         parentLLArrList.get(i).getBackground().setAlpha(50);
                         parentLLArrList.get(i).setOrientation(LinearLayout.HORIZONTAL);
@@ -221,10 +170,8 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                         CheckBox cb= new CheckBox(EventDetails.this);
                         cb.setId(i+500);
                         cb.setText(here_mailIdsNames.get(membersList.get(i)));
+                        cb.setPadding(0,0,0,7);
                         cb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
-                        //cb.setBackgroundColor(Color.CYAN);
-                        //cb.setBackgroundColor(Color.rgb(0,220,220));
-                        //cb.getBackground().setAlpha(50);
                         LinearLayout.LayoutParams params1= new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,66.0f);
                         params1.setMargins(0,0,0,0);
                         cb.setLayoutParams(params1);
@@ -234,24 +181,19 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                             @Override
                             public void onClick(View v) {
                                 boolean checked = ((CheckBox) v).isChecked();
-                                // Check which checkbox was clicked
                                 if (checked){
-                                    Toast.makeText(EventDetails.this,"just AAth", Toast.LENGTH_SHORT).show();
+
                                     et.setId(Integer.parseInt(String.valueOf(v.getId()))+500);
                                     et.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
                                     LinearLayout.LayoutParams params2= new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,34.0f);
                                     params2.setMarginEnd(0);
                                     et.setLayoutParams(params2);
-                                    //et.setBackgroundColor(Color.RED);
-                                    //et.setBackgroundColor(Color.rgb(0,220,220));
-                                    //et.getBackground().setAlpha(50);
                                     et.setHint("amount");
                                     et.setGravity(Gravity.CENTER);
                                     et.setHorizontallyScrolling(true);
                                     et.addTextChangedListener(textWatcher);
                                     et.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
                                     parentLLArrList.get(Integer.parseInt(String.valueOf(v.getId()))-500).addView(et);
-                                    Toast.makeText(EventDetails.this,String.valueOf(Integer.parseInt(String.valueOf(v.getId()))-500), Toast.LENGTH_SHORT).show();
                                     etIds.add(Integer.parseInt(String.valueOf(v.getId()))+500);
                                 }
                                 if(!checked){
@@ -278,17 +220,6 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                 }
             };
             cTimer.start();
-
-
-
-
-
-
-//cancel timer
-
-
-
-
 
 
         toEventEqual.setOnClickListener(new View.OnClickListener() {
@@ -320,7 +251,6 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
                 event1.setPaidBy(paidBy);
                 event1.setDistributionType("Equal");
                 event1.paidmailIds=paidmailIds;
-                Toast.makeText(EventDetails.this, "size                         "+event1.paidmailIds.size(), Toast.LENGTH_LONG).show();
                 Intent i= new Intent(EventDetails.this, EventEqual.class);
                 i.putExtra(EventEqual.EXTRA_DATA,event1);
                 i.putExtra("tripId",tripId);
@@ -365,22 +295,6 @@ public class EventDetails extends AppCompatActivity implements TextWatcher {
 
     }
 
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        Toast.makeText(EventDetails.this, "Before ",Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        Toast.makeText(EventDetails.this, "on text chnged",Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    public void afterTextChanged(Editable editable) {
-        Toast.makeText(EventDetails.this, "after text change",Toast.LENGTH_SHORT).show();
-    }
-/*  @Override
-    void cancelTimer() {
-        if(cTimer!=null)
-            cTimer.cancel();
-    }*/
 }

@@ -32,6 +32,7 @@ public class PastEventDetails extends AppCompatActivity {
     private TextView createdBy;
     private TextView billAmount;
     private TextView distributionType;
+    private TextView paidBy;
 
     //ArrayList<LinearLayout> parentLLArrList = new ArrayList<LinearLayout>();
     ArrayList<Integer> etIds= new ArrayList<Integer>();
@@ -43,7 +44,6 @@ public class PastEventDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_event_details);
         String eventName = getIntent().getExtras().getString("eventName");
-        Toast.makeText(PastEventDetails.this,eventName, Toast.LENGTH_LONG).show();
         Intent prev_intent = getIntent();
         tripId=prev_intent.getStringExtra("tripId");
 
@@ -51,12 +51,10 @@ public class PastEventDetails extends AppCompatActivity {
         createdBy=findViewById(R.id.createdBy );
         billAmount=findViewById(R.id.billAmount  );
         distributionType=findViewById(R.id.distributionType );
-
+        paidBy=findViewById(R.id.paidBy);
+        paidBy.setBackgroundColor(Color.rgb(0,220,220));
+        paidBy.getBackground().setAlpha(50);
         parentLL = findViewById(R.id.parentLL);
-
-        LinearLayout linearLayout=findViewById(R.id.linearlayout);
-        linearLayout.setBackgroundColor(Color.rgb(0,220,220));
-        linearLayout.getBackground().setAlpha(50);
 
 
         DocumentReference ref2= FirebaseFirestore.getInstance().collection("Trips").document(tripId).collection("eventlist").document(eventName);
@@ -69,12 +67,19 @@ public class PastEventDetails extends AppCompatActivity {
                         Event event1 = documentSnapshot.toObject(Event.class);
 
                         name.setText("Name: "+event1.getName());
+                        name.setBackgroundColor(Color.rgb(0,220,220));
+                        name.getBackground().setAlpha(50);
                         createdBy.setText("Created By: "+event1.getCreatedBy());
+                        createdBy.setBackgroundColor(Color.rgb(0,220,220));
+                        createdBy.getBackground().setAlpha(50);
                         billAmount.setText("Total Bill Amount: "+ event1.getBillAmount());
+                        billAmount.setBackgroundColor(Color.rgb(0,220,220));
+                        billAmount.getBackground().setAlpha(50);
                         distributionType.setText("Distribution Type: "+event1.getDistributionType());
+                        distributionType.setBackgroundColor(Color.rgb(0,220,220));
+                        distributionType.getBackground().setAlpha(50);
 
                         String size=String.valueOf(event1.paidBy.size());
-                        Toast.makeText(PastEventDetails.this,size, Toast.LENGTH_LONG).show();
 
                         int i=0;
                         for (Map.Entry<String, String> entry : event1.paidBy.entrySet()){
@@ -85,58 +90,43 @@ public class PastEventDetails extends AppCompatActivity {
                             b.setId(i+500);
                             b.setText(key+ " : ₹"+ value);
                             b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
-                            //b.setBackgroundColor(Color.CYAN);
                             LinearLayout.LayoutParams params1= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
                             params1.setMargins(150,5,30,0);
                             b.setLayoutParams(params1);
-                            // b.setGravity(Gravity.CENTER);
-
-                           // parentLLArrList.get(i).addView(b);
                             parentLL.addView(b);
 
                             i++;
                         }
 
 
-                       // parentLLArrList=new ArrayList<LinearLayout>();
-
                         int id=100000;
                         TextView participants= new TextView(PastEventDetails.this);
                         participants.setId(id);
-                        LinearLayout.LayoutParams params1= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                        params1.setMargins(40,50,0,45);
+                        LinearLayout.LayoutParams params1= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+                        params1.setMargins(0,50,0,45);
                         participants.setLayoutParams(params1);
                         participants.setGravity(Gravity.FILL);
-                       // participants.setPadding(,17,0,17);
                         participants.setText("Participants ->");
                         participants.setTextColor(Color.BLACK);
                         participants.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
                         participants.setTypeface(null, Typeface.BOLD);;
+                        participants.setBackgroundColor(Color.rgb(0,220,220));
+                        participants.getBackground().setAlpha(50);
+                        participants.setPadding(40,31,31,30);
                         parentLL.addView(participants);
-                      //  parentLL.addView(parentLLArrList.get(i));
-
 
                         int z=0;
                         for (Map.Entry<String, String> entry : event1.participants.entrySet()){
                             String key = entry.getKey();
                             Object value = entry.getValue();
-                            // Toast.makeText(EventDetails.this,"aahe aahe", Toast.LENGTH_LONG).show();
-
-
-                            //parentLLArrList.get(i).setBackgroundColor(Color.YELLOW);
-
-                            // parentLLArrList.get(i).setWeightSum(100);
                             TextView b= new TextView(PastEventDetails.this);
                             b.setId(z+500);
                             b.setText(key+ " : ₹"+ value);
                             b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
-                            //b.setBackgroundColor(Color.CYAN);
+
                             LinearLayout.LayoutParams params2= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
                             params2.setMargins(150,5,30,0);
                             b.setLayoutParams(params2);
-                            // b.setGravity(Gravity.CENTER);
-
-
                             parentLL.addView(b);
 
                             z++;
@@ -144,7 +134,7 @@ public class PastEventDetails extends AppCompatActivity {
 
 
                     }catch (Exception e){
-                        Toast.makeText(PastEventDetails.this, "NAy banla object", Toast.LENGTH_SHORT).show();
+
                     }
 
                 } else {

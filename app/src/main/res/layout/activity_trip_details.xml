@@ -1,72 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:id="@+id/scr"
-    android:layout_height="match_parent"
-    >
-    <RelativeLayout
 
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:weightSum="100"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TripDetails">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="12"
+    android:weightSum="100"
+    android:orientation="horizontal"
+    android:background="#1DB9BD"
+>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_weight="40"
+        android:text="Trip Name:"
+        android:textSize="20dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textStyle="bold"
+         />
+
+    <EditText
+        android:id="@+id/tripNameTextView"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="60"
+        android:layout_height="match_parent"
+        android:hint=""
+         />
 
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="100dp"
-            android:text="Enter name of the trip:"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+</LinearLayout>
 
-        <EditText
-            android:id="@+id/tripNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="100dp"
-            android:layout_toRightOf="@id/textView"
-            android:hint="__________" />
-
-        <Button
-            android:id="@+id/addMembersButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tripNameTextView"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="50dp"
-            android:onClick="addMember"
-            android:text="Add Members" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="12"
+        android:orientation="horizontal"
+        android:padding="1dp"
+        android:weightSum="100">
 
         <Button
             android:id="@+id/nextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:onClick="addTrip"
-            android:layout_toRightOf="@id/addMembersButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_below="@id/tripNameTextView"
-            android:layout_marginTop="100dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/addMembersButton"
+            android:layout_weight="50"
+            android:onClick="addTrip"
             android:text="Next" />
 
+        <Button
+            android:id="@+id/addMembersButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tripNameTextView"
+            android:layout_weight="50"
+            android:onClick="addMember"
+            android:text="Add Members"
 
+            />
+
+
+    </LinearLayout>
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:id="@+id/scr"
+        android:layout_height="0dp"
+        android:layout_weight="76"
+        >
         <TextView
             android:id="@+id/membersList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/addMembersButton"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="50dp"
-            android:padding="15dp"
             android:gravity="center"
+            android:lineSpacingExtra="11dp"
+            android:padding="15dp"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            tools:layout_editor_absoluteY="189dp" />
 
-
-    </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+    </LinearLayout>

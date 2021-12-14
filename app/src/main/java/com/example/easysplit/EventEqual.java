@@ -34,21 +34,10 @@ public class EventEqual extends AppCompatActivity {
     ArrayList<Integer> memIds= new ArrayList<Integer>();
     private EditText currentEt;
 
-    /*   private Button mem1 ;
-       private Button mem2 ;
-       private Button mem3 ;
 
-       private EditText amount1 ;
-       private EditText amount2 ;
-       private EditText amount3 ;
-   */
     TripMemRetrival tr;
     FirebaseFirestore db= FirebaseFirestore.getInstance();
     private Button done;
-
-   /* private Button mem1 ;
-    private Button mem2 ;
-    private Button mem3 ;*/
 
     TripMemRetrival members;
     public static final String EXTRA_DATA="EXTRA_DATA";
@@ -95,8 +84,6 @@ public class EventEqual extends AppCompatActivity {
                     boolean checked = ((CheckBox) v).isChecked();
                     // Check which checkbox was clicked
                     if (checked){
-
-                        Toast.makeText(EventEqual.this,String.valueOf(Integer.parseInt(String.valueOf(v.getId()))), Toast.LENGTH_SHORT).show();
                         memIds.add(Integer.parseInt(String.valueOf(v.getId())));
                     }
                     if(!checked){
@@ -109,10 +96,6 @@ public class EventEqual extends AppCompatActivity {
             parentLL.addView(parentLLArrList.get(i));
 
         }
-
-
-
-
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override

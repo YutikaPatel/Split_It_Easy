@@ -17,7 +17,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -101,7 +101,7 @@ public class Settlement extends AppCompatActivity {
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-       // ArrayList<String> membermails= new ArrayList<String>();
+
         parentLL = findViewById(R.id.parentLL);
 
         String memName= new String();
@@ -115,19 +115,10 @@ public class Settlement extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
 
-                  //  Toast.makeText(Settlement.this,"before for  "+mailIds.size()+"" ,Toast.LENGTH_SHORT).show();
-
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         mailIds.add(document.getId());
 
-                       // Toast.makeText(Settlement.this,"in for  " +mailIds.size()+"",Toast.LENGTH_SHORT).show();
-
                     }
-                    //Toast.makeText(Settlement.this,"after for  "+mailIds.size()+"" ,Toast.LENGTH_SHORT).show();
-
-
-
-                   // Toast.makeText(Settlement.this,"Navinnnnnnnnn for  "+mailIds.size()+"" ,Toast.LENGTH_SHORT).show();
 
                     for (int i = 0; i < mailIds.size(); i++) {
 
@@ -140,11 +131,7 @@ public class Settlement extends AppCompatActivity {
                                 if (documentSnapshot.exists()) {
                                     try {
 
-                                        //EvenTester event1 = documentSnapshot.toObject(EvenTester.class);
-                                        Toast.makeText(Settlement.this,"memeber size"+members.size() ,Toast.LENGTH_LONG).show();
-                                        //  Toast.makeText(EventsPage.this, "Name: " + event1.getName()+"bill"+event1.getBill()+ "\n" , Toast.LENGTH_SHORT).show();
-                                        //+ "cb: " + event1.getBill()+ "pb: "+event1.paidBy.get("Yutika")
-                                        //+ "pb: "+event1.paidBy.get("Yutika").toString()
+
                                         String paid = documentSnapshot.getString("paid");
                                         String toPay = documentSnapshot.getString("toPay");
                                         String Name=documentSnapshot.getString("Name");
@@ -155,24 +142,23 @@ public class Settlement extends AppCompatActivity {
                                         members.put(Name, pp);
 
                                     } catch (Exception e) {
-                                        // Toast.makeText(EventsPage.this, "NAy banla object", Toast.LENGTH_SHORT).show();
                                     }
 
                                 } else {
-                                    //Toast.makeText(EventsPage.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+
                                 }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                //Toast.makeText(EventsPage.this, "Error!", Toast.LENGTH_SHORT).show();
+
                             }
                         });
 
                     }
 
                 } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
+
                 }
                 ;
             }
@@ -183,10 +169,9 @@ public class Settlement extends AppCompatActivity {
 
         CountDownTimer cTimer=null;
 
-        cTimer = new CountDownTimer(5000, 100) {
+        cTimer = new CountDownTimer(4000, 80) {
             public void onTick(long millisUntilFinished) {
-                Toast.makeText(Settlement.this, "wait", Toast.LENGTH_SHORT).show();
-                // Toast.makeText(EventDetails.this,"aahe aahe", Toast.LENGTH_SHORT).show();
+
 
             }
 
@@ -198,7 +183,7 @@ public class Settlement extends AppCompatActivity {
                 LinearLayout.LayoutParams params1;
 
                 for (Map.Entry<String,ArrayList<Double>> entry : members.entrySet()){
-                   //  entry.getKey() entry.getValue());
+
                     String name=entry.getKey();
                     ArrayList<Double> pp=entry.getValue();
                     double paid=pp.get(0);
@@ -217,21 +202,19 @@ public class Settlement extends AppCompatActivity {
                 }
 
                 receivers.sort(new ReceiverSorter());
-
-                //System.out.println();
                 payers.sort(new PayerSorterDes());
 
 
                 for(int i=0;i<payers.size();i++) {
                     if(payers.get(i).amount<receivers.get(0).amount) {
                         receivers.get(0).amount -= payers.get(i).amount;
-                        str.add(payers.get(i).name+" owes Rs"+payers.get(i).amount+" to "+receivers.get(0).name);
+                        str.add(payers.get(i).name+" owes ₹"+payers.get(i).amount+" to "+receivers.get(0).name);
                         receivers.sort(new ReceiverSorter());
                         payers.remove(i);
                         i--;
                     }
                     else if(payers.get(i).amount==receivers.get(0).amount) {
-                        str.add(payers.get(i).name+" owes Rs"+payers.get(i).amount+" to "+receivers.get(0).name);
+                        str.add(payers.get(i).name+" owes ₹"+payers.get(i).amount+" to "+receivers.get(0).name);
                         payers.remove(i);
                         i--;
                         receivers.remove(0);
@@ -240,22 +223,22 @@ public class Settlement extends AppCompatActivity {
                         continue;
                     }
                 }
-                if(payers.size()!=0) {
+                if(payers.size()!=0 && receivers.size()!=0) {
                     receivers.sort(new ReceiverSorter());
                     payers.sort(new PayerSorter());
-                    while(payers.size()!=0) {
+                    while(payers.size()!=0&& receivers.size()!=0) {
                         if(payers.get(0).amount<receivers.get(0).amount) {
-                            str.add(payers.get(0).name+" owes Rs"+payers.get(0).amount+" to "+receivers.get(0).name);
+                            str.add(payers.get(0).name+" owes ₹"+payers.get(0).amount+" to "+receivers.get(0).name);
                             receivers.get(0).amount -= payers.get(0).amount;
                             payers.remove(0);
                         }
                         else if(payers.get(0).amount==receivers.get(0).amount) {
-                            str.add(payers.get(0).name+" owes Rs"+payers.get(0).amount+" to "+receivers.get(0).name);
+                            str.add(payers.get(0).name+" owes ₹"+payers.get(0).amount+" to "+receivers.get(0).name);
                             payers.remove(0);
                             receivers.remove(0);
                         }
                         else {
-                            str.add(payers.get(0).name+" owes Rs"+receivers.get(0).amount+" to "+receivers.get(0).name);
+                            str.add(payers.get(0).name+" owes ₹"+receivers.get(0).amount+" to "+receivers.get(0).name);
                             payers.get(0).amount -= receivers.get(0).amount;
                             receivers.remove(0);
                         }
@@ -263,38 +246,31 @@ public class Settlement extends AppCompatActivity {
 
                 }
 
-
-
                 for(int r=0;r<str.size();r++){
 
                     b= new TextView(Settlement.this);
                     b.setId(idTv);
                     params1= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params1.setMargins(40,50,0,45);
+                    params1.setMargins(30,20,30,20);
                     b.setLayoutParams(params1);
                     b.setGravity(Gravity.FILL);
-                    // participants.setPadding(,17,0,17);
+                    b.setPadding(17,60,17,60);
                     b.setText(str.get(r));
                     b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
                     b.setTypeface(null, Typeface.BOLD);;
                     b.setBackgroundColor(Color.rgb(0,220,220));
                     b.getBackground().setAlpha(50);
                     parentLL.addView(b);
-                    // parentLLArrList.get(i).addView(b);
+
 
 
                 }
 
 
-
-                Toast.makeText(Settlement.this,members.size()+"  "+members.get("haha")+" "+mailIds.size(), Toast.LENGTH_SHORT).show();
-
             }
         };
 
         cTimer.start();
-
-
 
 
     }

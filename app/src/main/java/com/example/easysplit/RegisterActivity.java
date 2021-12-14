@@ -74,9 +74,9 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                //Toast.makeText(RegisterActivity.this, "values added in user database",Toast.LENGTH_SHORT).show();
+
                             }else{
-                                //Toast.makeText(RegisterActivity.this, "Couldn't add value",Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     });

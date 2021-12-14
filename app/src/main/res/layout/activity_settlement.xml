@@ -30,9 +30,11 @@
             <Button
                 android:id="@+id/settlements"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginRight="6dp"
-                android:text="Settlement" />
+                android:text="Settlement"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>

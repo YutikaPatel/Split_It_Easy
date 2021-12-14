@@ -46,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
                     Toast.makeText(LoginActivity.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(LoginActivity.this, "before calling!", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(LoginActivity.this, "before calling!", Toast.LENGTH_SHORT).show();
                     loginUser(txt_email , txt_password);
-                    Toast.makeText(LoginActivity.this, "afetr calling!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, "afetr calling!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

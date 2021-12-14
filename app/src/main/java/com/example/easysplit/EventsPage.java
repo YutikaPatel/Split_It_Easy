@@ -74,8 +74,6 @@ public class EventsPage extends AppCompatActivity {
                             endTrip.setText("FINAL SETTLEMENTS");
                         }
 
-
-
                     }else{
 
                     }
@@ -93,41 +91,32 @@ public class EventsPage extends AppCompatActivity {
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         list.add(document.getId());
-                       // Toast.makeText(EventsPage.this,"in for" ,Toast.LENGTH_LONG).show();
+
                     }
 
-                    String size=String.valueOf(list.size());
-                    //Toast.makeText(EventsPage.this,size, Toast.LENGTH_LONG).show();
-
                     for (int i=0; i<list.size(); i++){
-                        // Toast.makeText(EventDetails.this,"aahe aahe", Toast.LENGTH_LONG).show();
+
                         parentLLArrList.add( new LinearLayout(EventsPage.this));
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                         params.setMargins(0,25,0,0);
                         parentLLArrList.get(i).setLayoutParams(params);
                         parentLLArrList.get(i).setId(i);
                         parentLLArrList.get(i).setGravity(Gravity.CENTER);
-                        //parentLLArrList.get(i).setBackgroundColor(Color.YELLOW);
                         parentLLArrList.get(i).setOrientation(LinearLayout.HORIZONTAL);
-                       // parentLLArrList.get(i).setWeightSum(100);
                         Button b= new Button(EventsPage.this);
                         b.setId(i+500);
                         b.setText(list.get(i));
                         b.setBackgroundColor(Color.rgb(0,220,220));
                         b.getBackground().setAlpha(50);
-                        //b.setTextColor(Color.WHITE);
-                        //b.setBackgroundColor(Color.parseColor("721C1B1B"));
                         LinearLayout.LayoutParams params1= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
                         params1.setMargins(30,0,30,0);
                         b.setLayoutParams(params1);
-                       // b.setGravity(Gravity.CENTER);
                         int j=i;
                         b.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
 
                                     Intent intent= new Intent(EventsPage.this, PastEventDetails.class);
-                                    //intent.putExtra(EventEqual.EXTRA_DATA,list.get(i));
                                     intent.putExtra("eventName", list.get(j));
                                     intent.putExtra("tripId",tripId);
                                     startActivity(intent);

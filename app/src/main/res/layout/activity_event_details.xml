@@ -72,7 +72,7 @@
             android:gravity="center"
             android:text="Total Amount:"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="19sp"
             android:textStyle="bold" />
 
 

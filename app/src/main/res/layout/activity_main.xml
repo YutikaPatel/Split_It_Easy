@@ -8,58 +8,55 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <RelativeLayout
 
+    <LinearLayout
 
+android:orientation="horizontal"
+        android:weightSum="100"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="15"
-        android:background="#1DB9BD"
-        >
-
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:textSize="17dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="25dp"
-            android:text="Log out" />
-
-        <Button
-            android:id="@+id/addTrip"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toLeftOf="@id/logout"
-            android:onClick="createTrip"
-            android:text="Add Trip"
-            android:textSize="17dp"
-
-            />
+        android:background="#1DB9BD">
 
         <TextView
             android:id="@+id/tripsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="25dp"
+            android:layout_width="0dp"
+            android:layout_weight="30"
+            android:layout_height="match_parent"
             android:layout_toLeftOf="@id/addTrip"
             android:text="Trips"
+
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="30dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+           />
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/addTrip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_weight="35"
+            android:layout_margin="7dp"
+            android:onClick="createTrip"
+            android:text="Add Trip"
+
+            android:textSize="17dp" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="7dp"
+            android:layout_weight="35"
+            android:text="Log out"
+            android:textSize="17dp" />
 
 
+    </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView2"

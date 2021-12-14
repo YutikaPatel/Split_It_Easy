@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         ArrayList<String> arr = (ArrayList<String>) doc.get("Trips");
 
-                        //System.out.println(array);
+
                         Iterator iter = arr.iterator();
-                        String curr = "";
+
                         int currTop = 200;
                         while (iter.hasNext()) {
                             String currTrip = (String) iter.next();
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                             newBt.setText(name);
 
                                         } else {
-                                            Log.d("LOGS", "No data");
-                                            Toast.makeText(MainActivity.this, "No data", Toast.LENGTH_SHORT).show();
+
+                                            Toast.makeText(MainActivity.this, "Sorry Error Occured", Toast.LENGTH_SHORT).show();
                                         }
                                     }
 
@@ -92,18 +92,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             LinearLayout rl = (LinearLayout) findViewById(R.id.rel);
                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                             params.setMargins(20,25,20,0);
-                            //currTop += 100;
                             rl.addView(newBt, params);
                             newBt.setBackgroundColor(Color.rgb(0,220,220));
                             newBt.getBackground().setAlpha(50);
-                            //curr += ","+iter.next();
+
                         }
 
-                        //tv.setText(userEmail);
-                        //Log.d("Document", doc.getData().toString());     //ouput in console
-                        // String res= doc.getData().toString();
-                        //tv.setText(res);
-                        //Toast.makeText(MainActivity.this,res ,Toast.LENGTH_SHORT).show();
+
                     } else {
                         Log.d("Document", "No data");
                         Toast.makeText(MainActivity.this, "No data", Toast.LENGTH_SHORT).show();
@@ -135,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int currId = v.getId();
         String clickedTrip = buttons.get(currId);
         Log.d("LOGS", clickedTrip);
-        Toast.makeText(MainActivity.this, "" + clickedTrip, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(MainActivity.this,EventsPage.class);
         intent.putExtra("tripId",clickedTrip);
         startActivity(intent);
@@ -143,204 +137,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 };
 
-        //FirebaseFirestore db= FirebaseFirestore.getInstance();
 
-/*  Add to database with input doc name
-
-        Map<String,Object> user= new HashMap<>();
-        user.put("username","yutikapatel@gmail.com");
-        user.put("Name","Yutika");
-        user.put("toPay",45);
-        user.put("tobePayed",55);
-
-        db.collection("UserData").document("User").set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "values added",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(MainActivity.this, "Couldn't add value",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-*/
-
-
-
-        /* add extra key value to existing document
-
-        Map<String,Object> data= new HashMap<>();
-        data.put("clearDept","false");
-        db.collection("UserData").document("User").set(data, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "extra values added",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(MainActivity.this, "Couldn't add the extra value",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-   /*  Add to database with unique id generated
-
-        Map<String,Object> user= new HashMap<>();
-        user.put("username","radhikawadekar@gmail.com");
-        user.put("Name","Radhika");
-        user.put("toPay",45);
-        user.put("tobePayed",55);
-        db.collection("UserData").add(user).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "values added",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(MainActivity.this, "Couldn't add value",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-         */
-
-/*
-Update existing doc
- DocumentReference ref= FirebaseFirestore.getInstance().collection("UserData").document("User");
-        ref.update("clearDept", true);
- */
-
-        /*
-        Get data from database
-    DocumentReference ref= FirebaseFirestore.getInstance().collection("UserData").document("User");
-        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc= task.getResult();
-                    if(doc.exists()){
-                        Log.d("Document", doc.getData().toString());     //ouput in console
-                        String res= doc.getData().toString();
-                        Toast.makeText(MainActivity.this,res ,Toast.LENGTH_SHORT).show();
-                    }else{
-                        Log.d("Document", "No data");
-                        Toast.makeText(MainActivity.this,"No data" ,Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-         */
-
-      //  DocumentReference ref= FirebaseFirestore.getInstance().collection("Trips").document("temptrip").collection("eventlist").document("Petrol");
-
-         /*  Event event=new Event("Food","james","radhika");
-       //EventList el=new EventList();
-       //el.eventList.add(event);
-
-        db.collection("Trips").document("temptrip").collection("eventlist").document("Food").set(event).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "values added",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(MainActivity.this, "Couldn't add value",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-*/
-
-
-        //EventList el=new EventList();
-        //el.eventList.add(event);
-   /*     addEvent.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-                txt_name= name.getText().toString();
-                txt_bill=bill.getText().toString();
-                //num_bill = Integer.parseInt(bill.getText().toString());
-
-                num_bill+=1;
-
-                EvenTester event=new EvenTester(txt_name,txt_bill);
-
-                db.collection("Trips").document("temptrip").collection("eventlist").document(txt_name).set(event).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(MainActivity.this, "event added",Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(MainActivity.this, "Couldn't add event sorry",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-            }
-        });
-        */
-
-
-
-
-/*
-
-        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()) {
-                                Event utravlela = documentSnapshot.toObject(Event.class);
-
-                                String nm = utravlela.getName();
-                                String cb = utravlela.getCreatedBy();
-                                String pb = utravlela.getPaidBy();
-
-                                Toast.makeText(MainActivity.this, "Name: " + utravlela.name+ "\n" + "cb: " + utravlela.createdBy+ "pb: "+pb, Toast.LENGTH_SHORT).show();
-
-                            } else {
-                                Toast.makeText(MainActivity.this, "Document does not exist", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-*/
-       //DocumentReference ref2= FirebaseFirestore.getInstance().collection("Trips").document("temptrip").collection("eventlist");
-
-   /*    db.collection("Trips").document("temptrip").collection("eventlist").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<String> list = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        list.add(document.getId());
-                        Toast.makeText(MainActivity.this,document.getId() ,Toast.LENGTH_SHORT).show();
-                    }
-                    Log.d(TAG, list.toString());
-
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                }
-            }
-        });
-
-*/
-
-/*get selected value from database
-
-    FirebaseFirestore.getInstance().collection("UserData").whereEqualTo("toPay",45).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-            if(task.isSuccessful()){
-                for(QueryDocumentSnapshot doc:task.getResult()){
-                Log.d("Document",doc.getId()+" " +doc.getData());  //ouput in console
-
-                }
-            }
-            }
-        });
-
-
-*/
 
 

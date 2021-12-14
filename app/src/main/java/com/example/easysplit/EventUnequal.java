@@ -6,17 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
+
 import android.text.InputType;
-import android.text.TextWatcher;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,21 +27,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-/*public class EventUnequal extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_unequal);
-    }
-}*/
 
 public class EventUnequal extends AppCompatActivity  {
-
-
 
     Event event1;
 
@@ -53,21 +41,12 @@ public class EventUnequal extends AppCompatActivity  {
     ArrayList<Integer> etIds= new ArrayList<Integer>();
     private EditText currentEt;
 
-    /*   private Button mem1 ;
-       private Button mem2 ;
-       private Button mem3 ;
-
-       private EditText amount1 ;
-       private EditText amount2 ;
-       private EditText amount3 ;
-   */
     TripMemRetrival tr;
     FirebaseFirestore db= FirebaseFirestore.getInstance();
     private Button done;
 
-   /* private Button mem1 ;
-    private Button mem2 ;
-    private Button mem3 ;*/
+
+    private Button mem3 ;
 
     TripMemRetrival members;
     public static final String EXTRA_DATA="EXTRA_DATA";
@@ -114,7 +93,7 @@ public class EventUnequal extends AppCompatActivity  {
                     boolean checked = ((CheckBox) v).isChecked();
                     // Check which checkbox was clicked
                     if (checked){
-                        Toast.makeText(EventUnequal.this,"just AAth", Toast.LENGTH_SHORT).show();
+
                         et.setId(Integer.parseInt(String.valueOf(v.getId()))+500);
                         et.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
                         LinearLayout.LayoutParams params2= new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,34.0f);
@@ -124,9 +103,8 @@ public class EventUnequal extends AppCompatActivity  {
                         et.setHint("amount");
                         et.setGravity(Gravity.CENTER);
                         et.setHorizontallyScrolling(true);
-                       // et.addTextChangedListener(textWatcher);
                         parentLLArrList.get(Integer.parseInt(String.valueOf(v.getId()))-500).addView(et);
-                        Toast.makeText(EventUnequal.this,String.valueOf(Integer.parseInt(String.valueOf(v.getId()))-500), Toast.LENGTH_SHORT).show();
+
                         etIds.add(Integer.parseInt(String.valueOf(v.getId()))+500);
                     }
                     if(!checked){
@@ -138,7 +116,6 @@ public class EventUnequal extends AppCompatActivity  {
                         etIds.remove(new Integer(etId));
 
 
-
                     }
                 }
             });
@@ -148,14 +125,9 @@ public class EventUnequal extends AppCompatActivity  {
         }
 
 
-
-
-
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-               // String txt_bill=consumed.getText().toString();
 
                 HashMap<String,String> participants=new HashMap<String,String>();
 
@@ -170,7 +142,6 @@ public class EventUnequal extends AppCompatActivity  {
                     sum+=Double.parseDouble(txt_amount);
                 }
                 if(sum==Double.parseDouble(event1.billAmount)){
-                    //Toast.makeText(EventUnequal.this, "Just ghuslo JJJJJJJJJJJJJJJJJJJJJJJJJJ",Toast.LENGTH_LONG).show();
 
                     for(int i=0;i<etIds.size();i++){
                         String mailId= membersList.get(etIds.get(i)-1000);
@@ -181,15 +152,11 @@ public class EventUnequal extends AppCompatActivity  {
                         }
                         participants.put( event1.mailIdsNames.get(mailId),txt_amount);
                         tr.updatetoPay(tripId,mailId,txt_amount);
-                        //Toast.makeText(EventUnequal.this, "mail"+mailId+"  amt "+txt_amount, Toast.LENGTH_LONG).show();
+
                     }
-                    //Toast.makeText(EventUnequal.this, "size "+participants.size(), Toast.LENGTH_LONG).show();
                     event1.setParticipants(participants);
-                   // Toast.makeText(EventUnequal.this, "size "+event1.participants.size(), Toast.LENGTH_LONG).show();
-                   // Toast.makeText(EventUnequal.this, "mail"+event1.membersMails.size(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(EventUnequal.this, "size"+event1.paidmailIds.size(), Toast.LENGTH_LONG).show();
+
                     for (Map.Entry<String, String> set :event1.paidmailIds.entrySet()) {
-                        Toast.makeText(EventUnequal.this, "mail"+set.getValue()+"  amt "+set.getValue(), Toast.LENGTH_LONG).show();
                       tr.updatePaid(tripId,set.getKey(),set.getValue());
 
                     }
@@ -200,9 +167,9 @@ public class EventUnequal extends AppCompatActivity  {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                //Toast.makeText(EventUnequal.this, "Event successfully added",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EventUnequal.this, "Event successfully added",Toast.LENGTH_SHORT).show();
                             }else{
-                                Toast.makeText(EventUnequal.this, "Couldn't add event sorry",Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     });
