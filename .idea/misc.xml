@@ -8,18 +8,20 @@
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_event_equal.xml" value="0.25416666666666665" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_event_unequal.xml" value="0.264" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_events_page.xml" value="0.264" />
-        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_login.xml" value="0.13020833333333334" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_past_event_details.xml" value="0.2" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_register.xml" value="0.2" />
-        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_settlement.xml" value="0.264" />
-        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_start.xml" value="0.264" />
-        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_trip_details.xml" value="0.264" />
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_settlement.xml" value="0.2" />
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_start.xml" value="0.19375" />
+        <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/activity_trip_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Drivers/academics/sem 5/psdl/EasySplit/app/src/main/res/layout/dialog_add_members.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
+        <entry key="app/src/main/res/layout/activity_settlement.xml" value="0.20572916666666666" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
@@ -28,7 +30,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.264" />
+        <option name="scale" value="0.1" />
       </ProjectState>
     </option>
   </component>
