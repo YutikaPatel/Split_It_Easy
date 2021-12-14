@@ -197,4 +197,9 @@ public class EventsPage extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(EventsPage.this,MainActivity.class);
+        startActivity(intent);
+    }
 }

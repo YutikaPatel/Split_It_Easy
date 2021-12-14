@@ -274,4 +274,11 @@ public class Settlement extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed(){
+        Log.d("LOGS","Going back");
+        Intent intent = new Intent(Settlement.this,MainActivity.class);
+        startActivity(intent);
+    }
 }
