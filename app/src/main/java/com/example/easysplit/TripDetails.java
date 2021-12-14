@@ -64,7 +64,10 @@ public class TripDetails extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onBackPressed(){
+        finishAffinity();
+    }
     public void addTrip(View view){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
