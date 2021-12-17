@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                        if(arr!=null) {
                            Iterator iter = arr.iterator();
 
-                           int currTop = 200;
+                           //int currTop = 200;
                            while (iter.hasNext()) {
                                String currTrip = (String) iter.next();
 

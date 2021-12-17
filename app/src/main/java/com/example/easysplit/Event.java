@@ -11,8 +11,10 @@ public class Event implements Serializable{
     String billAmount;
     HashMap<String,String> paidBy = new HashMap<String,String>();
     HashMap<String,String> participants = new HashMap<String,String>();
+
     HashMap<String,String> mailIdsNames = new HashMap<String,String>();
     ArrayList<String> membersMails= new ArrayList<String>();
+
     HashMap<String,String> paidmailIds = new HashMap<String,String>();
 
     public Event(){

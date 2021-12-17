@@ -32,7 +32,7 @@ public class EventEqual extends AppCompatActivity {
     LinearLayout parentLL;
     ArrayList<LinearLayout> parentLLArrList = new ArrayList<LinearLayout>();
     ArrayList<Integer> memIds= new ArrayList<Integer>();
-    private EditText currentEt;
+
 
 
     TripMemRetrival tr;

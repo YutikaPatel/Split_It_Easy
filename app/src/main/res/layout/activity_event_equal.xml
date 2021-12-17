@@ -20,7 +20,7 @@
         android:lines="5"
         android:maxLines="4"
         android:singleLine="false"
-        android:text="Select The Participants "
+        android:text="Select the members who partcipated in                 the event "
         android:textSize="18sp"
         android:textStyle="bold" />
 

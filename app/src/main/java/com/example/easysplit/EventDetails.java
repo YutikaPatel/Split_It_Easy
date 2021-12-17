@@ -268,6 +268,7 @@ public class EventDetails extends AppCompatActivity  {
 
                 HashMap<String,String> paidBy=new HashMap<String,String>();
                 HashMap<String,String> paidmailIds= new HashMap<String,String>();
+
                 for(int i=0;i<etIds.size();i++){
                     String mailId= membersList.get(etIds.get(i)-1000);
                     currentEt=findViewById(etIds.get(i));

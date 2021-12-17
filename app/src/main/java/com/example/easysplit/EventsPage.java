@@ -36,12 +36,11 @@ import java.util.Map;
 public class EventsPage extends AppCompatActivity {
 
     String tripId;
-    String eventId="";
     private Button toEventDetails ;
     private Button endTrip;
-    private Button addEvent;
+
     ArrayList<LinearLayout> parentLLArrList = new ArrayList<LinearLayout>();
-    ArrayList<Integer> etIds= new ArrayList<Integer>();
+
 
     LinearLayout parentLL;
 
@@ -50,12 +49,13 @@ public class EventsPage extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_page);
-       Intent prev_intent = getIntent();
+        Intent prev_intent = getIntent();
         tripId=prev_intent.getStringExtra("tripId");
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         List<String> list=new ArrayList<String>();
-        List<String> memlist=new ArrayList<String>();
+
+
         parentLL = findViewById(R.id.parentLL);
         endTrip=findViewById(R.id.endTrip);
         toEventDetails=findViewById(R.id.toEventDetails);
