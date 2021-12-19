@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,7 +33,7 @@ public class EventEqual extends AppCompatActivity {
     LinearLayout parentLL;
     ArrayList<LinearLayout> parentLLArrList = new ArrayList<LinearLayout>();
     ArrayList<Integer> memIds= new ArrayList<Integer>();
-
+    TextView textView3;
 
 
     TripMemRetrival tr;
@@ -47,10 +48,13 @@ public class EventEqual extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_unequal);
 
+
+        textView3=findViewById(R.id.textView3);
         done=findViewById(R.id.done);
         Intent prev_intent = getIntent();
         tripId=prev_intent.getStringExtra("tripId");
 
+        textView3.setText("Select the members who partcipated in                   the event");
         parentLL = findViewById(R.id.parentLL);
         event1=(Event)getIntent().getSerializableExtra(EXTRA_DATA);
         tr=new TripMemRetrival();

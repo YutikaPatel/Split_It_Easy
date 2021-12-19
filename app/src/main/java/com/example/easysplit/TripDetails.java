@@ -141,6 +141,7 @@ public class TripDetails extends AppCompatActivity {
                             Log.d("LOGS", "No data");
                             Toast.makeText(TripDetails.this,"No data" ,Toast.LENGTH_SHORT).show();
                         }
+
                     }
 
                 }

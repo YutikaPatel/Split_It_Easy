@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:weightSum="100"
     android:orientation="vertical"
-    tools:context=".EventDetails">
+    tools:context=".EventUnequal">
 
 
     <TextView
@@ -20,7 +20,7 @@
         android:lines="5"
         android:maxLines="4"
         android:singleLine="false"
-        android:text="Select The Participants And Enter Their Corresponding Cosumed Amount :"
+        android:text="Select The Participants And Enter Their Corresponding Consumed Amount :"
         android:textSize="18sp"
         android:textStyle="bold" />
 
